@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.medicineapp.ui.screens.DetailScreen
-import com.example.medicineapp.ui.screens.HomeScreen
+import com.example.medicineapp.ui.screens.homescreen.HomeScreen
 import com.example.medicineapp.ui.screens.login.LogInScreen
 import com.example.medicineapp.ui.theme.MedicineAppTheme
+import com.example.medicineapp.ui.util.model.AssociatedDrug
 import com.sendcredit.ui.navigation.DetailScreenRoute
 import com.sendcredit.ui.navigation.LogInScreenRoute
 import com.sendcredit.ui.navigation.MainScreenRoute
@@ -45,11 +47,14 @@ fun SendCreditApp() {
                 }
 
                 composable<DetailScreenRoute> {
-                    DetailScreen()
+                    val params:DetailScreenRoute=it.toRoute()
+                    DetailScreen(AssociatedDrug(name = params.name , dose = params.dose , strength = params.strength))
                 }
 
                 composable<MainScreenRoute> {
-                    HomeScreen()
+                    HomeScreen(navigateToDetailPager = {
+                        navController.navigate(DetailScreenRoute(name = it.name?:"", dose = it.dose?:"" , strength = it.strength?:""))
+                    })
                 }
 
 

@@ -1,5 +1,6 @@
 package com.sendcredit.ui.navigation
 
+import com.example.medicineapp.ui.util.model.AssociatedDrug
 import kotlinx.serialization.Serializable
 
 
@@ -10,5 +11,5 @@ object LogInScreenRoute
 object MainScreenRoute
 
 @Serializable
-object DetailScreenRoute
+data class DetailScreenRoute(val name:String  , val dose:String , val strength:String)
 
